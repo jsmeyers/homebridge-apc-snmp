@@ -13,7 +13,6 @@ module.exports = function (homebridge) {
 function APCAccessory(log, config) {
     this.log = log;
     this.name = config["name"];
-    this.apikey = config["apikey"];
     this.location = config["location"];
     this.lastupdate = 0;
 }
