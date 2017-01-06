@@ -1,3 +1,4 @@
+
 var Service, Characteristic;
 var temperatureService;
 var apcUps = require("./snmp.js");
@@ -17,8 +18,7 @@ function APCAccessory(log, config) {
     this.lastupdate = 0;
 }
 
-<<
-<< << < HEAD
+
 APCAccessory.prototype = {
         getState: function(callback) {
                 ups.getTemperature(function(err, temperature) {
@@ -33,8 +33,8 @@ APCAccessory.prototype = {
 
                     this.log('The current temperature is:', temperature, 'C');
                     callback(null, temperature);
-                }.bind(this)); ===
-                === =
+                }.bind(this)); 
+            
                 APCAccessory.prototype = {
                     getState: function(callback) {
                         ups.getTemperature(function(err, temperature) {
