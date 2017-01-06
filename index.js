@@ -13,7 +13,6 @@ module.exports = function (homebridge) {
 function APCAccessory(log, config) {
     this.log = log;
     this.name = config["name"];
-    this.apikey = config["apikey"];
     this.location = config["location"];
     this.lastupdate = 0;
 }
@@ -24,12 +23,14 @@ APCAccessory.prototype =
 		ups.getTemperature(function(err, temperature) {
   		if (err) {
     		console.log(err.toString());
-callback(error);    		
+callback(err);    		
 return;
   		}	
 		this.log('The current temperature is:', temperature, 'C');
 		this.temperature = temperature;
 		temperatureService.setCharacteristic(Characteristic.CurrentTemperature, this.temperature);
+		
+		this.log('The current temperature is:', temperature, 'C');
 		callback(null, temperature);
 		}.bind(this));
 
