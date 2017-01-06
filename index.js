@@ -3,6 +3,9 @@ var temperatureService;
 var apcUps = require("./snmp.js");
 var ipaddress = require("./ipaddress");
 var ups = new apcUps(ipaddress);
+const DEF_MIN_TEMPERATURE = -100,
+      DEF_MAX_TEMPERATURE = 100,
+      DEF_TIMEOUT = 5000;
 
 module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
@@ -15,55 +18,44 @@ function APCAccessory(log, config) {
     this.name = config["name"];
     this.location = config["location"];
     this.lastupdate = 0;
+    this.model = config["model"] || "Model not available";
+    this.serial = config["serial"] || "Non-defined serial";
+    this.timeout = config["timeout"] || DEF_TIMEOUT;
+    this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
+    this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
 }
 
 APCAccessory.prototype = {
-    getState: function(callback) {
-        ups.getTemperature(function(err, temperature) {
-            if (err) {
-                console.log(err.toString());
-                callback(error);
-                return;
-            }
-            this.log('The current temperature is:', temperature, 'C');
-            this.temperature = temperature;
-            temperatureService.setCharacteristic(Characteristic.CurrentTemperature, this.temperature);
-            callback(null, temperature);
-        }.bind(this));
+   getState: function(callback) {
+       ups.getTemperature(function(err, temp) {
+        if (err) {
+            console.log(err.toString());
+        return;
+       }
+       console.log('The current temperature is:', temp, 'C');
+   });
 
-    },
-    identify: function(callback) {
+   },
+   identify: function(callback) {
         this.log("Identify requested!");
         callback(); // success
-    },
+   },
 
-    getServices: function() {
-        var informationService = new Service.AccessoryInformation();
+   getServices: function () {
+      this.informationService = new Service.AccessoryInformation();
+      this.informationService
+      .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
+      .setCharacteristic(Characteristic.Model, this.model)
+      .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-        informationService
-            .setCharacteristic(Characteristic.Manufacturer, "OpenWeatherMap")
-            .setCharacteristic(Characteristic.Model, "Location")
-            .setCharacteristic(Characteristic.SerialNumber, "");
-
-        temperatureService = new Service.TemperatureSensor(this.name);
-        temperatureService
-            .getCharacteristic(Characteristic.CurrentTemperature)
-            .on("get", this.getState.bind(this));
-
-        temperatureService
-            .getCharacteristic(Characteristic.CurrentTemperature)
-            .setProps({
-                minValue: -30
-            });
-
-        temperatureService
-            .getCharacteristic(Characteristic.CurrentTemperature)
-            .setProps({
-                maxValue: 120
-            });
-
-        return [informationService, temperatureService];
-    }
-
-
-};
+      this.temperatureService = new Service.TemperatureSensor(this.name);
+      this.temperatureService
+         .getCharacteristic(Characteristic.CurrentTemperature)
+         .on('get', this.getState.bind(this))
+         .setProps({
+             minValue: this.minTemperature,
+             maxValue: this.maxTemperature
+         });
+      return [this.informationService, this.temperatureService];
+   }
+};   
