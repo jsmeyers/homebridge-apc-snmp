@@ -1,5 +1,4 @@
 var Service, Characteristic;
-var temperatureService;
 var apcUps = require("./snmp.js");
 var ipaddress = require("./ipaddress");
 var ups = new apcUps(ipaddress);
