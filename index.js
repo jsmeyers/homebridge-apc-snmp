@@ -17,10 +17,8 @@ function APCAccessory(log, config) {
     this.log = log;
     this.name = config["name"];
     this.location = config["location"];
-    this.lastupdate = 0;
     this.model = config["model"] || "Model not available";
     this.serial = config["serial"] || "Non-defined serial";
-    this.timeout = config["timeout"] || DEF_TIMEOUT;
     this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
     this.temperature = 0.0;
