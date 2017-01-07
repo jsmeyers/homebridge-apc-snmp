@@ -36,6 +36,7 @@ APCAccessory.prototype = {
              this.temperature = 25.1;
              console.log(this.temperature);
                callback('25.1');
+             
    });
 
    },
@@ -54,7 +55,9 @@ APCAccessory.prototype = {
       this.temperatureService = new Service.TemperatureSensor(this.name);
       this.temperatureService
          .getCharacteristic(Characteristic.CurrentTemperature)
-         .on('get', this.getState.bind(this))
+         .on('get', this.getState.bind(this);
+            console.log('test'))
+         
          .setProps({
              minValue: this.minTemperature,
              maxValue: this.maxTemperature
