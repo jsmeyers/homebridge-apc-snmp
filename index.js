@@ -46,7 +46,7 @@ APCAccessory.prototype = {
       this.informationService = new Service.AccessoryInformation();
       this.informationService
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
-      .setCharacteristic(Characteristic.Model, this.model)
+      .setCharacteristic(Characteristic.Model, temperature)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
       this.temperatureService = new Service.TemperatureSensor(this.name);
