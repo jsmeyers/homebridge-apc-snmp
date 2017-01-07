@@ -25,7 +25,7 @@ function APCAccessory(log, config) {
     this.service = "Temperature Sensor";
 }
 APCAccessory.prototype = {
-   getState: function(callback) {
+   getTemperature: function(callback) {
        ups.getTemperature(function(temperature) {
         
                callback(temperature);
@@ -49,7 +49,7 @@ if (this.service == "Temperature Sensor") {
       			temperatureService = new Service.TemperatureSensor("Room Temperature");
 			temperatureService
 			        .getCharacteristic(Characteristic.CurrentTemperature)
-			        .on('get', this.getState.bind(this));
+			        .on('get', this.getTemperature.bind(this));
 
 
 	return [informationService, temperatureService];
