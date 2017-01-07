@@ -22,7 +22,7 @@ function APCAccessory(log, config) {
     this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
     this.temperature = 0.0;
-    this.service = config["service"] || "Temperature Sensor";
+    this.service = "Temperature Sensor";
 
 APCAccessory.prototype = {
    getState: function(callback) {
