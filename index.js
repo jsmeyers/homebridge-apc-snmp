@@ -2,6 +2,7 @@ var Service, Characteristic;
 var apcUps = require("./snmp.js");
 var ipaddress = require("./ipaddress");
 var ups = new apcUps(ipaddress);
+
 const DEF_MIN_TEMPERATURE = -100,
       DEF_MAX_TEMPERATURE = 100,
       DEF_TIMEOUT = 5000;
@@ -22,7 +23,7 @@ function APCAccessory(log, config) {
     this.timeout = config["timeout"] || DEF_TIMEOUT;
     this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
-    this.temperature = 0;
+    this.temperature = 0.0;
 }
 
 APCAccessory.prototype = {
@@ -34,7 +35,7 @@ APCAccessory.prototype = {
               
        }
        console.log('The current temperature is:', temperature, 'C');
-             this.temperature = 25.0;
+             this.temperature = 25.1;
              console.log(this.temperature);
                callback('25');
    });
