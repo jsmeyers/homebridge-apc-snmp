@@ -32,8 +32,6 @@ APCAccessory.prototype = {
         callback('24');
               
        }
-       console.log('The current temperature is:', temperature, 'C');
-             this.temperature = 25.1;
              console.log(this.temperature);
                callback('25.1');
              
