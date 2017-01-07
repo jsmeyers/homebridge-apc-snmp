@@ -30,7 +30,8 @@ APCAccessory.prototype = {
        ups.getTemperature(function(error, temperature) {
         if (error) {
             console.log(error);
-        return;
+        callback('24');
+              
        }
        console.log('The current temperature is:', temperature.toString(), 'C');
                callback('25');
@@ -46,7 +47,7 @@ APCAccessory.prototype = {
       this.informationService = new Service.AccessoryInformation();
       this.informationService
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
-      .setCharacteristic(Characteristic.Model, temperature)
+      .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
       this.temperatureService = new Service.TemperatureSensor(this.name);
