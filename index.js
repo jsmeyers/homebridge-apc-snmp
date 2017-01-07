@@ -22,6 +22,7 @@ function APCAccessory(log, config) {
     this.timeout = config["timeout"] || DEF_TIMEOUT;
     this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
+    this.temperature = 0;
 }
 
 APCAccessory.prototype = {
@@ -33,6 +34,8 @@ APCAccessory.prototype = {
               
        }
        console.log('The current temperature is:', temperature.toString(), 'C');
+             this.temperature = temperature;
+             this.log(this.temperature);
                callback('25');
    });
 
