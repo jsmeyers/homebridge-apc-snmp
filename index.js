@@ -28,7 +28,7 @@ APCAccessory.prototype = {
    getState: function(callback) {
        ups.getTemperature(function(error, temperature) {
             console.log(temperature);
-               callback(temperature);
+               callback(null,temperature);
              
    });
 
