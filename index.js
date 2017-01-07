@@ -23,7 +23,7 @@ function APCAccessory(log, config) {
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
     this.temperature = 0.0;
     this.service = "Temperature Sensor";
-
+}
 APCAccessory.prototype = {
    getState: function(callback) {
        ups.getTemperature(function(error, temperature) {
@@ -34,7 +34,7 @@ APCAccessory.prototype = {
 
    },
    identify: function(callback) {
-        this.log("Identify requested!");
+ this.log("Identify requested!");
         callback(); // success
    },
 
@@ -44,6 +44,7 @@ APCAccessory.prototype = {
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
+	   
 if (this.service == "Temperature Sensor") {
       			temperatureService = new Service.TemperatureSensor("Room Temperature");
 			temperatureService
