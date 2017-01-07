@@ -26,12 +26,12 @@ function APCAccessory(log, config) {
 }
 APCAccessory.prototype = {
    getTemperature: function(callback) {
-       ups.getTemperature(function(temperature)) {
-        console.log(temperature);
-               callback(temperature);
+       ups.getTemperature(function(temperature) {
+
              
    });
-
+        console.log(temperature);
+               callback(temperature);  
    },
    identify: function(callback) {
  this.log("Identify requested!");
