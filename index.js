@@ -31,11 +31,7 @@ APCAccessory.prototype = {
 	       console.dir();
 	       return(null,temperature);
              
-   });
- console.log(ups.temperature);
-	   console.dir();
-	   callback(null,ups.temperature);
-   },
+   }).bind(this)},
    identify: function(callback) {
  this.log("Identify requested!");
         callback(); // success
