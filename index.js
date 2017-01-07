@@ -27,10 +27,6 @@ function APCAccessory(log, config) {
 APCAccessory.prototype = {
    getTemperature: function(callback) {
        ups.getTemperature(function(temperature) {
-	       console.log(temperature);
-	       console.log(((temperature * 9) / 5) + 32);    
-	       var ftemp = temperature * 9 / 5 + 32;
-               console.log(ftemp);
 	       callback(temperature);
              
    });
