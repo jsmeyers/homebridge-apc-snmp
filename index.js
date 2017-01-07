@@ -39,20 +39,19 @@ APCAccessory.prototype = {
    },
 
    getServices: function () {
-      this.informationService = new Service.AccessoryInformation();
-      this.informationService
+      var informationService = new Service.AccessoryInformation();
+      informationService
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serial);
+if (this.service == "Temperature Sensor") {
+      			temperatureService = new Service.TemperatureSensor("Room Temperature");
+			temperatureService
+			        .getCharacteristic(Characteristic.CurrentTemperature)
+			        .on('get', this.getState.bind(this));
 
-      this.temperatureService = new Service.TemperatureSensor(this.name);
-      this.temperatureService
-         .getCharacteristic(Characteristic.CurrentTemperature)
-         .on('get', this.getState.bind(this))
-         .setProps({
-             minValue: this.minTemperature,
-             maxValue: this.maxTemperature
-         });
-      return [this.informationService, this.temperatureService];
-   }
-};   
+
+	return [informationService, temperatureService];
+		}
+	}
+};
