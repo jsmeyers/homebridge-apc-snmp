@@ -21,7 +21,7 @@ function APCAccessory(log, config) {
     this.serial = config["serial"] || "Non-defined serial";
     this.minTemperature = config["min_temp"] || DEF_MIN_TEMPERATURE;
     this.maxTemperature = config["max_temp"] || DEF_MAX_TEMPERATURE;
-    this.temperature = 0.0;
+    this.temperature = 90.0;
     this.service = "Temperature Sensor";
 }
 APCAccessory.prototype = {
