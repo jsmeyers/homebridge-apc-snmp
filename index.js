@@ -31,7 +31,7 @@ APCAccessory.prototype = {
                callback(temperature);
              
    });
- this.log("Temp requested!");
+ console.log("Temp requested!");
    },
    identify: function(callback) {
  this.log("Identify requested!");
